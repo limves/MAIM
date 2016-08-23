@@ -146,7 +146,15 @@ top.artists[,1]
 # seven 
 # history of user
 top.artists.history <- music.usage[,c("user",auxnames)]
- ## falta
+# Todo:
+
+# eigth sum
+
+user1.history <- head(music.usage[music.usage$user=="1",c]) ### FALTA... LO PUSO ARRIVA
+score.recommendation <- function (history, similarities){
+  return (sum(history*similarities)/sum(similarities))
+}
+
 
 for (i in  1:ncol(user.data)){ # users
   for (j in 1:ncol(user.data)){ # artists
@@ -168,6 +176,10 @@ for (i in  1:ncol(user.data)){ # users
       
       # history of user
       top.artists.history <- music.usage [music.usage$user,c("user", top.artists.names)][-1]
+      
+      # 
+      user.data[i,j] <- score.recommendation(similarities = top.artists.sim, )
+      score.recommendation # lo perdi...
 
     }
   }
