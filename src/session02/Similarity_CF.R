@@ -115,6 +115,7 @@ for (i in 1:ncol(music.usage.sim))
   music.usage.similar.artists[i,] <- t(head(n=11, 
                                             rownames(music.usage.sim[order(music.usage.sim[,i],decreasing=T),][i])))
 }
+
 music.usage.similar.artists[1,1:10]
 
 # 10.- Qu?? artistas son los m??s similares a los beatles?
@@ -122,3 +123,53 @@ music.usage.similar.artists
 music.usage.similar.artists <- data.frame(music.usage.similar.artists)
 music.usage.similar.artists <- music.usage.similar.artists[-1]
 music.usage.similar.artists["the.beatles",]
+
+# Segunda parte 
+
+# second point 2
+# By user
+user.data <- matrix(NA, nrow = nrow(music.usage), ncol=ncol(music.usage) -1,
+                    dimnames = list (music.usage$user, colnames(music.usage[-1])))
+
+user.data
+# point 3, 
+user.data[1:5, 1:5]
+# point 4
+rownames(user.data)[1]
+# five point 
+music.usage[music.usage$user=="1","the.killers"]
+# six
+top.artists <- head(n=6, music.usage.sim[order(music.usage.sim[,"the.killers"],decreasing=T),]["the.killers"])
+rownames(top.artists)
+auxnames <-rownames(top.artists)
+top.artists[,1]
+# seven 
+# history of user
+top.artists.history <- music.usage[,c("user",auxnames)]
+ ## falta
+
+for (i in  1:ncol(user.data)){ # users
+  for (j in 1:ncol(user.data)){ # artists
+    user <- rownames(user.data)[i]
+    artist <- colnames(user.data)[j]
+    
+    # five point 
+    if (music.usage[music.usage$user==user,artist] == 1)
+    {
+      user.data[i,j] <- ""
+    }
+    else 
+    {
+      top.artists <- head(n=6, music.usage.sim[order(music.usage.sim[,artist],decreasing=T),][artist])
+      top.artists.names <- rownames(top.artist)
+      top.artists.sim <- top.artist[,1]
+      top.artists.names <- top.artists.names[-1]
+      top.artists.sim <-top.artists.sim[-1]
+      
+      # history of user
+      top.artists.history <- music.usage [music.usage$user,c("user", top.artists.names)][-1]
+
+    }
+  }
+}
+
